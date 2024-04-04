@@ -18,19 +18,29 @@ const App = () => {
   };
 
   const handleRestart = () => {
-    setCurrentQuestion(0);
+   
+    console.log("😡",currentQuestion)
     setResults([]);
     setShowResults(false);
   };
 
   const calculateResult = () => {
     const total = results.reduce((acc, value) => acc + value, 0);
+    
     return total;
   };
 
   const showResult = () => {
     setShowResults(true);
   };
+
+  const handleResult = (getResult)=>
+  
+  {
+
+    setResults(prevResult=>[...prevResult,getResult]);
+   
+  }
 
   console.log(currentQuestion);
 
@@ -61,14 +71,14 @@ const App = () => {
             currentQuestion={currentQuestion}
             setCurrentQuestion={setCurrentQuestion}
             results={results}
-            setResults={setResults}
+            handleResult={handleResult}
           />
         ) : showResults ? (
           <Box>
             <Typography variant="h4">
               Your Hogwarts House is: {calculateResult()}
             </Typography>
-            <Button variant="contained" onClick={handleRestart()}>
+            <Button variant="contained" onClick={handleRestart}>
               Restart Quiz
             </Button>
           </Box>
@@ -77,7 +87,10 @@ const App = () => {
             Start Quiz!
           </Button>
         )}
-        {start && currentQuestion === quiz.questions.length - 1 && (
+        {
+          
+        
+        (start && currentQuestion === quiz.questions.length - 1 )&& (
           <Button variant="contained" onClick={showResult}>
             Show Results
           </Button>
